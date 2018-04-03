@@ -6,7 +6,7 @@
 <!-- ar.js -->
 <script src="ar2.js"></script>
 <script>THREEx.ArToolkitContext.baseURL = '../'</script>
-<script src="js/loaders/PLYLoader.js"></script>
+<script src="js/loaders/STLLoader.js"></script>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
 	<a href="https://github.com/jeromeetienne/AR.js/" target="_blank">AR.js</a> - three.js mobile performance
@@ -130,7 +130,7 @@
 	//		add an object in the scene
 	//////////////////////////////////////////////////////////////////////////////////
 
-        var loader = new THREE.PLYLoader();
+        var loader = new THREE.STLLoader();
 
 
 	var arWorldRoot = smoothedRoot
@@ -147,38 +147,22 @@
 	arWorldRoot.add( mesh );
 
 
-	var loader = new THREE.PLYLoader();
-	// Binary files
-
-	var material = new THREE.MeshPhongMaterial( { color: 0xAAAAAA, specular: 0x111111, shininess: 200 } );
-
-	// Colored binary STL
-	loader.load( 'Leo.ply', function ( geometry ) {
-
-	var meshMaterial = material;
-	if (geometry.hasColors) {
-	   meshMaterial = new THREE.MeshPhongMaterial({ opacity: geometry.alpha, vertexColors: THREE.VertexColors });
-	}
-
-	var mesh = new THREE.Mesh( geometry, meshMaterial );
-
-	mesh.position.set( 0.5, -0.5, 0 );
-	mesh.rotation.set( - Math.PI / 2, 0, 0);
-	mesh.scale.set( 1, 1, 1 );
-
-	mesh.castShadow = true;
-	mesh.receiveShadow = true;
-
-	arWorldRoot.add( mesh );
-
-	} )
-;
+	loader.load( './modelEverett.stl', function ( geometry ) {
+					var mesh = new THREE.Mesh( geometry, material );
+					mesh.position.set( 0, - 0.37, - 0.6 );
+					mesh.rotation.set( - Math.PI / 2, 0, 0 );
+					mesh.scale.set( 2, 2, 2 );
+					mesh.castShadow = true;
+					mesh.receiveShadow = true;
+					scene.add( mesh );
+				} );
 	
-	var geometry	= new THREE.TorusKnotGeometry(0.3,0.1,64,16);
-	var material	= new THREE.MeshNormalMaterial(); 
-	var mesh	= new THREE.Mesh( geometry, material );
-	mesh.position.y	= 0.5
-	arWorldRoot.add( mesh );
+	
+	//var geometry	= new THREE.TorusKnotGeometry(0.3,0.1,64,16);
+	//var material	= new THREE.MeshNormalMaterial(); 
+	//var mesh	= new THREE.Mesh( geometry, material );
+	//mesh.position.y	= 0.5
+	//arWorldRoot.add( mesh );
 	
 	onRenderFcts.push(function(){
 		mesh.rotation.x += 0.1
