@@ -147,10 +147,11 @@
 	mesh.position.y	= geometry.parameters.height/2
 	arWorldRoot.add( mesh );
         
-
+        var mesh2 = new THREE.Mesh( geometry, material );
+	
 	loader.load( './leo2.stl', function ( geometry ) {
 		                        loadedSTL = true;
-					var mesh2 = new THREE.Mesh( geometry, material );
+					
 					mesh2.position.set( 0, 0, 0 );
 					mesh2.rotation.set( - Math.PI / 2, 0, 0 );
 					mesh2.scale.set( 0.1, 0.1, 0.1 );
@@ -168,7 +169,7 @@
 	
 	onRenderFcts.push(function(){
 		if(loadedSTL)mesh2.rotation.z +=0.1;
-		//mesh.rotation.y += 0.1
+		 mesh.rotation.z += 0.1
 	})
 
 	//////////////////////////////////////////////////////////////////////////////////
