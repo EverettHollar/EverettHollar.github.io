@@ -35,6 +35,7 @@
 
 	// init scene and camera
 	var scene	= new THREE.Scene();
+	var loadedSTL  = false;
 	
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Initialize a basic camera
@@ -148,6 +149,7 @@
         
 
 	loader.load( './leo2.stl', function ( geometry ) {
+		                        loaded = true;
 					var mesh2 = new THREE.Mesh( geometry, material );
 					mesh2.position.set( 0, 0, 0 );
 					mesh2.rotation.set( - Math.PI / 2, 0, 0 );
@@ -165,7 +167,7 @@
 	//arWorldRoot.add( mesh );
 	
 	onRenderFcts.push(function(){
-		mesh2.rotation.z +=0.1;
+		if(loaded)mesh2.rotation.z +=0.1;
 		//mesh.rotation.y += 0.1
 	})
 
