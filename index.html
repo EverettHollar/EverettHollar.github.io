@@ -137,7 +137,7 @@
 	var arWorldRoot = smoothedRoot
 
 	// add a torus knot	
-	var geometry	= new THREE.CubeGeometry(1,1,1);
+	var geometry	= new THREE.CubeGeometry(1,1,.25);
 	var material	= new THREE.MeshNormalMaterial({
 		transparent : true,
 		opacity: 0.5,
@@ -153,7 +153,7 @@
 		                        loadedSTL = true;
 					mesh2 = new THREE.Mesh( geometry, material );
 					mesh2.position.set( 0, 0, 0 );
-					mesh2.rotation.set( - Math.PI / 2, 0, 0 );
+					mesh2.rotation.set( 0, 0, 0 );
 					mesh2.scale.set( 0.1, 0.1, 0.1 );
 					mesh2.castShadow = true;
 					mesh2.receiveShadow = true;
