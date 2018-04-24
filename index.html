@@ -145,7 +145,7 @@
 	}); 
 	var mesh	= new THREE.Mesh( geometry, material );
 	mesh.position.y	= geometry.parameters.height/2;
-	mesh.position.z	= -geometry.parameters.height/2;
+	mesh.position.z	= geometry.parameters.height/2;
 	//mesh.position.y	= 0;
 	arWorldRoot.add( mesh );
         
@@ -157,6 +157,7 @@
 					mesh2.position.set( 0, 0, 0 );
 					mesh2.rotation.set( Math.PI, 0, 0 );
 					mesh2.scale.set( 0.1, 0.1, 0.1 );
+		                        mesh.position.z	= geometry.parameters.height/4;
 					mesh2.castShadow = true;
 					mesh2.receiveShadow = true;
 					arWorldRoot.add( mesh2 );
