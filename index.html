@@ -8,11 +8,14 @@
 <script>THREEx.ArToolkitContext.baseURL = '../'</script>
 <script src="js/loaders/STLLoader.js"></script>
 
-<body style='margin : 0px; overflow: hidden; font-family: Monospace;'><script>
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
+	<a href="https://github.com/jeromeetienne/AR.js/" target="_blank">AR.js</a> - three.js mobile performance
+	<br/>
+	Contact me any time at <a href='https://twitter.com/jerome_etienne' target='_blank'>@jerome_etienne</a>
+</div><script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
-
 	// init renderer
 	var renderer	= new THREE.WebGLRenderer({
 		// antialias	: true,
@@ -25,10 +28,8 @@
 	renderer.domElement.style.top = '0px'
 	renderer.domElement.style.left = '0px'
 	document.body.appendChild( renderer.domElement );
-
 	// array of functions for the rendering loop
 	var onRenderFcts= [];
-
 	// init scene and camera
 	var scene	= new THREE.Scene();
 	var loadedSTL  = false;
@@ -36,28 +37,22 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Initialize a basic camera
 	//////////////////////////////////////////////////////////////////////////////////
-
 	// Create a camera
 	var camera = new THREE.Camera();
 	scene.add(camera);
-
 	////////////////////////////////////////////////////////////////////////////////
 	//          handle arToolkitSource
 	////////////////////////////////////////////////////////////////////////////////
-
 	var arToolkitSource = new THREEx.ArToolkitSource({
 		// to read from the webcam 
 		sourceType : 'webcam',
-
 		// to read from an image
 		// sourceType : 'image',
 		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',		
-
 		// to read from a video
 		// sourceType : 'video',
 		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',		
 	})
-
 	arToolkitSource.init(function onReady(){
 		onResize()
 	})
@@ -77,7 +72,6 @@
 	//          initialize arToolkitContext
 	////////////////////////////////////////////////////////////////////////////////
 	
-
 	// create atToolkitContext
 	var arToolkitContext = new THREEx.ArToolkitContext({
 		cameraParametersUrl: THREEx.ArToolkitContext.baseURL + '../data/data/camera_para.dat',
@@ -91,11 +85,9 @@
 		// copy projection matrix to camera
 		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
 	})
-
 	// update artoolkit on every frame
 	onRenderFcts.push(function(){
 		if( arToolkitSource.ready === false )	return
-
 		arToolkitContext.update( arToolkitSource.domElement )
 	})
 	
@@ -111,7 +103,6 @@
 		patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/shrek.patt'
 		// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji'
 	})
-
 	// build a smoothedControls
 	var smoothedRoot = new THREE.Group()
 	scene.add(smoothedRoot)
@@ -126,14 +117,10 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	//		add an object in the scene
 	//////////////////////////////////////////////////////////////////////////////////
-
         var loader = new THREE.STLLoader();
-
-
 	var arWorldRoot = smoothedRoot
-
 	// add box	
-	var geometry	= new THREE.CubeGeometry(0.5,0.5,.25);
+	var geometry	= new THREE.CubeGeometry(1,1,.25);
 	var material	= new THREE.MeshNormalMaterial({
 		transparent : true,
 		opacity: 0.7,
@@ -171,7 +158,6 @@
 		if(loadedSTL)mesh2.rotation.z +=0.02;
 		 mesh.rotation.z += 0.02;
 	})
-
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
@@ -182,7 +168,6 @@
 		renderer.render( scene, camera );
 		stats.update();
 	})
-
 	// run the rendering loop
 	var lastTimeMsec= null
 	requestAnimationFrame(function animate(nowMsec){
