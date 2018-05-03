@@ -1,0 +1,90 @@
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' />
+<style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZGNvbm5lciIsImEiOiJjaWh5OWlienIwM3F3dTFtMTAxaXVocWlhIn0.Md36HANfiiVNK5THoEfxqg';
+    var map = L.mapbox.map('map', 'mapbox.wheatpaste')
+        .setView([32.2660, -110.8778], 18);
+
+    var lat =   32.2660;
+    var long =-110.8778 ;
+    getLocation();
+    function getLocation() {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+    function showPosition(position) {
+        alert("two");
+        lat = position.coords.latitude;
+        long =   position.coords.longitude;
+        alert(lat);
+    }
+
+    L.marker([32.266141, -110.878087], {
+        icon: L.mapbox.marker.icon({
+            'marker-size': 'medium',
+            'marker-symbol': 'bus',
+            'marker-color': '#00f'
+        })
+    }).addTo(map);
+
+    L.marker([32.266475, -110.878482], {
+        icon: L.mapbox.marker.icon({
+            'marker-size': 'medium',
+            'marker-symbol': 'bus',
+            'marker-color': '#00f'
+        })
+    }).addTo(map);
+
+    L.marker([32.266478, -110.878876], {
+        icon: L.mapbox.marker.icon({
+            'marker-size': 'medium',
+            'marker-symbol': 'bus',
+            'marker-color': '#00f'
+        })
+    }).addTo(map);
+
+    L.marker([32.266117, -110.878386], {
+        icon: L.mapbox.marker.icon({
+            'marker-size': 'medium',
+            'marker-symbol': 'bus',
+            'marker-color': '#00f'
+        })
+    }).addTo(map);
+
+    L.marker([32.266621, -110.878825], {
+        icon: L.mapbox.marker.icon({
+            'marker-size': 'medium',
+            'marker-symbol': 'bus',
+            'marker-color': '#00f'
+        })
+    }).addTo(map);
+
+    var myIcon = L.icon({
+        iconUrl: 'shrek.png',
+        iconRetinaUrl: 'my-icon@2x.png',
+        iconSize: [38, 38],
+        iconAnchor: [19, 19],
+        popupAnchor: [0,0],
+        shadowUrl: 'my-icon-shadow.png',
+        shadowRetinaUrl: 'my-icon-shadow@2x.png',
+        shadowSize: [38, 38],
+        shadowAnchor: [38, 38]
+    });
+
+    L.marker([32.2660, -110.8778], {icon: myIcon}).addTo(map);
+</script>
+</body>
+</html>
+
